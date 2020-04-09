@@ -1,0 +1,52 @@
+<html>
+    <head>
+        <script src="https://code.jquery.com/jquery-3.3.1.js"></script>
+        <script type="text/javascript">
+
+	$(document).ready(function(){
+
+        $('#tempsub').click(
+            function(){
+
+                let city = $('#city').val();
+                console.log(city);
+                
+        
+                $.ajax({
+
+                url: "http://api.openweathermap.org/data/2.5/weather?units=imperial&q=" + city + "&appid=39d40f97c827897df52f6b534e6cea4f",
+                // Change YOURAPPID to your API key
+                dataType: 'json',
+                success: function(data) {
+                    //console.log("Temperature is:" + data);
+
+                    document.getElementById("temp").innerHTML = data.main.temp;
+
+                    $('temp').html(data.main.temp);
+                },
+                error: function() {
+                    alert("error");
+                }
+                });        
+            });
+    });
+
+        </script>
+        <style>
+            body {
+                      background-color: #ffdb58;
+                      font-size: 24px;
+                      font-family: 'montserrat';
+                      text-align: center;
+                      margin-top: 270px;
+                    }
+        </style>
+    </head>
+<body>
+
+    Insert a city: <input type="text" name="city" id="city"><input type="button" id="tempsub" value="Submit">
+    <br>
+    Current temperature: <h1 id="temp">0</h1>
+
+</body>
+</html>
